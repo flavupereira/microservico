@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/flavupereira/microservice-repo.git
+          clone-on-start: true
+          search-paths: '/loja.yml'

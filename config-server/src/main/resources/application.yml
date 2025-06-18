@@ -1,0 +1,13 @@
+server:
+  port: 8888
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/flavupereira/microservice-repo.git
+          default-label: main                  # Branch principal
+          search-paths: '{application}'        # Busca na pasta com o nome do serviço
+          clone-on-start: true                 # Força clone ao iniciar
+          force-pull: true                     # Sempre atualiza o repo
