@@ -1,6 +1,9 @@
 package br.com.flavio.microservice.loja.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.endpoint.SecurityContext;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +32,7 @@ public class CompraController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public Compra realizaCompra(@RequestBody CompraDTO compra) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		return compraService.realizaCompra(compra);
 	}
 }
