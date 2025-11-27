@@ -127,3 +127,81 @@ mvn spring-boot:run
 - LojaClient ↔ TransportadorClient
 
 - Circuit breaker com Hystrix
+
+
+## 🔄 Fluxo de Compra Completo
+
+1. Cliente → POST /compra (Loja Service)
+
+2. Loja Service → Registra compra como RECEBIDO
+
+3. Loja Service → FornecedorClient.realizaPedido()
+
+4. Fornecedor Service → Processa pedido e retorna tempo de preparo
+
+5. Loja Service → Atualiza estado para PEDIDO_REALIZADO
+
+6. Loja Service → TransportadorClient.reservaEntrega()
+
+7. Transportador Service →
+
+    Cria registro de entrega
+
+    Calcula previsão (data + 1 dia)
+
+    Gera voucher
+
+   Retorna voucher para Loja Service
+
+8. Loja Service → Atualiza estado para RESERVA_ENTREGA_REALIZADA
+
+9. Loja Service → Salva voucher e data de entrega
+
+## 🚚 Serviço de Transportador
+
+### Funcionalidades
+
+- Reserva de Entrega: Processa solicitações de entrega
+
+- Geração de Voucher: Cria número único de rastreamento
+
+- Cálculo de Previsão: Estima data de entrega (data solicitada + 1 dia)
+
+### Endpoints
+```
+POST /entrega - Reserva uma entrega e retorna voucher
+```
+
+## ⚙️ Configurações
+
+## Config Server
+
+- Transportador: Configuração externa via Spring Cloud Config
+
+- URI: http://localhost:8888
+
+- Perfil ativo: default
+
+- Nome da aplicação: transportador
+
+## Portas dos Serviços
+
+- Eureka: 8761
+
+- Auth: 8088
+
+- API Gateway: 8082
+
+- Loja: 8080
+
+- Transportador: 8083
+
+## 📊 Monitoramento
+
+- Spring Boot Actuator: Habilitado no API Gateway
+
+- Hystrix Dashboard: Circuit breaker metrics
+
+- Eureka Dashboard: http://localhost:8761
+
+- Fornecedor: Porta dinâmica (Eureka)
