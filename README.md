@@ -1,15 +1,22 @@
-# Microserviço Spring Boot
+## Sistema de Microserviços - E-commerce
+## 📋 Visão Geral
 
-## 🛠 Tecnologias
+Este projeto é um sistema de e-commerce baseado em microserviços, implementado com Spring Boot e Spring Cloud.
+O sistema é composto por vários serviços independentes que se comunicam entre si para fornecer funcionalidades 
+completas de compra, autenticação, gerenciamento de pedidos e transporte.
 
-| Tecnologia | Versão | Descrição |
-|------------|--------|-----------|
-| **Java** | 17+ | Linguagem de programação |
-| **Spring Boot** | 3.x | Framework principal |
-| **Spring Security** | 3.x | Autenticação e autorização |
-| **JWT** | 4.5.0 | Tokens de autenticação |
-| **Spring Data JPA** | 3.x | Persistência de dados |
-| **PostgreSQL** | - | Banco de dados |
-| **Lombok** | - | Redução de boilerplate |
-| **Validation API** | - | Validação de dados |
-| **Flyway** | 9.22.0 | Migração de banco |
+## 🏗️ Arquitetura do Sistema
+
+### Serviços Principais
+
+**1. API Gateway** (api-gateway) - Porta 8082
+
+**2. Serviço de Autenticação** (auth) - Porta 8088
+
+**3. Servidor Eureka** (eureka-server) - Porta 8761
+
+**4. Serviço de Loja** (loja) - Porta 8080
+
+**5. Serviço de Fornecedor** (fornecedor)
+
+**6. Serviço de Transportador** (transportador) - Porta 8083
